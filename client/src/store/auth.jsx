@@ -15,8 +15,8 @@ export const AuthProvider = ({children}) =>{
         return localStorage.removeItem("token");
     };
 
-// Login and Logout Visibility on page 
-let isLoggedIn = !!token;
+    // Login and Logout Visibility on page 
+    let isLoggedIn = !!token;
     
 
 return(
