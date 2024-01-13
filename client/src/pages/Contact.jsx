@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useAuth } from "../store/auth";
 
 export const Contact =()=>{
 
-    const [user,setUser] = useState({
+    const [contact,setContact] = useState({
         username :"",
         email:"",
         message:"",
@@ -10,13 +11,24 @@ export const Contact =()=>{
     const handleInput = (e) =>{
         let name = e.target.name;
         let value = e.target.value;
-       setUser({...user,[name]:value});
+       setContact({...contact,[name]:value});
     };
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(user);
     }
+    const [userData, setUserData] = useState(true);
+    const {userN} = useAuth();
 
+    if(userData && userN){
+        setContact({
+            username: userN.username,
+            email: userN.email,
+            message:""
+        });
+
+        setUserData(false);
+    }
     
     return (
         <>
@@ -34,15 +46,15 @@ export const Contact =()=>{
                             <form onSubmit={handleSubmit}>
                                 <div>
                                     <label htmlFor="username">Username</label>
-                                    <input type="text" id="username" placeholder="Enter Your Username here.." name="username" autoComplete="off" value={user.username} onChange={handleInput} required/>
+                                    <input type="text" id="username" placeholder="Enter Your Username here.." name="username" autoComplete="off" value={contact.username} onChange={handleInput} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="username">Email</label>
-                                    <input type="email" id="email" placeholder="Enter Your Email here.." name="email" autoComplete="off" value={user.email} onChange={handleInput} required/>
+                                    <input type="email" id="email" placeholder="Enter Your Email here.." name="email" autoComplete="off" value={contact.email} onChange={handleInput} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="message">Message</label>
-                                    <textarea name="message" id="message" placeholder="Drop Your Message Here.." cols="50" rows="6" autoComplete="off" maxLength={120} value={user.message} onChange={handleInput} required></textarea>
+                                    <textarea name="message" id="message" placeholder="Drop Your Message Here.." cols="50" rows="6" autoComplete="off" maxLength={120} value={contact.message} onChange={handleInput} required></textarea>
                                 </div>
                                 <br />
                                 <button className="btn btn" type="submit">Submit</button>

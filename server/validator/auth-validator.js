@@ -36,7 +36,7 @@ const loginSchema = z.object({
     password: z
     .string({required_error : "Enter Valid Password"})
     .min(6,{message : "Enter valid Password 6 char"})
-    .max(10,{message: "Enter Valid email 10"}),
+    
 });
 
 module.exports = {signupSchema,loginSchema};

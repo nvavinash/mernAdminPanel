@@ -45,8 +45,17 @@ try{
         res.status(401).json({msg: "Invalid Email or Password"});
     }
 }catch(error){
-    res.status(500).send({msg: "O..Ohh... Internal server error"});
+    res.status(500).json({msg: "O..Ohh... Internal server error"});
 }
 };
 
-module.exports = {home, register, login};
+const user = async(req,res) =>{
+try{
+    const userData = req.user;
+    return res.status(200).json({userData});
+}catch(error){
+    console.log(`error from the user route ${error}`)
+};
+};
+
+module.exports = {home, register, login, user};
