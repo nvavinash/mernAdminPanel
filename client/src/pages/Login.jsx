@@ -45,7 +45,7 @@ export const Login =()=>{
                 alert("login Successfull");
                 navigate("/");
             }else{
-                console.log("invalid Credintials");
+        
                 alert("Invalid Credentials");
             }
 

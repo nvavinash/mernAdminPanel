@@ -111,11 +111,16 @@ li{
 .grid-four-cols{
   grid-template-columns: repeat(4,1fr);
 }
+.grid-three-cols{
+  grid-template-columns: repeat(3,1fr);
+}
 .about-content p{
   font-size: 1.5rem;
 }
 strong{
   color: #646cff;
+  text-transform: capitalize;
+  font-size: 2rem;
 }
 /* reusable----- */
 button{
@@ -176,6 +181,12 @@ box-shadow: 0 1px 2px var(--dark-color);
 border-radius: .5rem;
 color: var(--dark-color);
 text-align: center;
+}
+.card{
+  background-color: var(--bg-color);
+box-shadow: 0 1px 2px var(--dark-color);
+border-radius: .5rem;
+border: none;
 }
 .div1{
   border-right: 0.2rem solid #242424;

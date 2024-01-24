@@ -3,32 +3,66 @@ import { useAuth } from "../store/auth";
 
 export const Contact =()=>{
 
-    const [contact,setContact] = useState({
+    const defaultContactFormData ={
         username :"",
         email:"",
         message:"",
-    });
-    const handleInput = (e) =>{
-        let name = e.target.name;
-        let value = e.target.value;
-       setContact({...contact,[name]:value});
     };
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(user);
-    }
-    const [userData, setUserData] = useState(true);
-    const {userN} = useAuth();
+
+    const [contact,setContact] = useState(defaultContactFormData);
+
+       //Contact form update as per user name 
+       const [userData, setUserData] = useState(true);
+       const {userN} = useAuth();
+
+    
 
     if(userData && userN){
         setContact({
             username: userN.username,
             email: userN.email,
-            message:""
+            message:"",
         });
 
         setUserData(false);
     }
+    
+    const handleInput = (e) =>{
+        const name = e.target.name;
+        const value = e.target.value;
+       setContact({...contact,[name]:value});
+    };
+
+   
+  
+ 
+
+    //Handle submit button======>
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        
+        try{
+            
+            const response = await fetch(`http://localhost:8080/api/form/contact`,{
+               method : "POST",
+               headers:{
+                "Content-Type": "application/json",
+               },
+               body: JSON.stringify(contact),
+            });
+            if(response.ok){
+                setContact(defaultContactFormData);
+                const data = await response.json();
+                alert("Message sent Successfully")
+                console.log(data);
+            }
+        }catch(error){
+            console.log(`this is error ${error}`);
+            
+        }
+    }
+
+  
     
     return (
         <>
