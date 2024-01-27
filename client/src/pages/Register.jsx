@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate} from "react-router-dom";
 import { useAuth } from "../store/auth";
+import {toast} from 'react-toastify';
+
 export const Register =()=>{
     
     const [user,setUser] = useState({
@@ -32,14 +34,14 @@ export const Register =()=>{
                 },
                 body:JSON.stringify(user),
             });
+
+            const res_data = await response.json();
+            console.log("res from server",res_data.extraDetails);
+            
             if(response.ok){
-       
-
-//stored JWT in local storage---------
-                const res_data = await response.json();
+//stored JWT in local storage--------- 
                 storeTokenInLs (res_data.token);
-                
-
+                toast.success("Registration successful");
                 setUser({
                     username:"",
                     email:"",
@@ -47,6 +49,8 @@ export const Register =()=>{
                     phone:""
                 });
                 navigate("/login");
+            }else{
+               toast.error(res_data.extraDetails ?res_data.extraDetails[0]:res_data.message);
             }
         }catch(error){
             console.log("register",error);

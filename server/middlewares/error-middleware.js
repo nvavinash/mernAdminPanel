@@ -2,8 +2,10 @@ const errorMiddleware = (err,req,res,next)=>{
 
     const status = err.status || 500;
     const message = err.message || "O..oh BackEnd Error";
-    const extradetails = err.extradetails || "O..oh Error from Backend..!";
+    const extraDetails = err.extraDetails || "O..oh Error from Backend..!";
 
-    return res.status(status).json({message, extradetails});
+    // console.log(`[${req.method}]  ${req.path} >> StatusCode:: ${status}, Message:: ${extraDetails}`)
+
+    return res.status(status).json({message, extraDetails});
 }
 module.exports = errorMiddleware;

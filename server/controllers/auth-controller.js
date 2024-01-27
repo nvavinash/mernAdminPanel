@@ -13,7 +13,7 @@ try{
     const {username,email,phone,password} = req.body;
     const userExists = await User.findOne({email: email ,phone: phone});
     if(userExists){
-       return res.status(400).json({msg: "user already exists"});
+       return res.status(400).json({message: "user already exists"});
     }
     // const saltRound = 10;
     // const hash_password = await bcrypt.hash(password,saltRound);
@@ -42,10 +42,10 @@ try{
             userId: userExists._id.toString(),
         })
     }else{
-        res.status(401).json({msg: "Invalid Email or Password"});
+        res.status(401).json({message: "Invalid Email or Password"});
     }
 }catch(error){
-    res.status(500).json({msg: "O..Ohh... Internal server error"});
+    res.status(500).json({message: "O..Ohh... Internal server error"});
 }
 };
 

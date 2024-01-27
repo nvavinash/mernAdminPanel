@@ -50,12 +50,16 @@ export const Contact =()=>{
                },
                body: JSON.stringify(contact),
             });
+            const data = await response.json();
+            alert("Message sent Successfully")
+            console.log(data);
+
             if(response.ok){
                 setContact(defaultContactFormData);
-                const data = await response.json();
-                alert("Message sent Successfully")
-                console.log(data);
-            }
+               
+                }else{
+                    alert(res_data.extraDetails?res_data.extraDetails[0]:res_data.message);
+                }
         }catch(error){
             console.log(`this is error ${error}`);
             

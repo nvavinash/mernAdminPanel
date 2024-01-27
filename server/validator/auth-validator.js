@@ -15,8 +15,7 @@ const signupSchema = z.object({
     .max(255, {message: "not more than 255 char"}),
 
     phone: z
-    .string({required_error: "phone no. is Required"})
-    .trim()
+    .string({required_error: "phone no. is Required"}).trim()
     .min(10, {message:"Phone Number must be at least 10."})
     .max(10, {message: "Do not user +91 or any country code"}),
     
@@ -30,13 +29,36 @@ const loginSchema = z.object({
     email : z
     .string({required_error: "Email is required"})
     .trim()
-    .email({message: "email must be at least 3 character"})
+    .email({message: "must be email"})
     .min(3, {message : "Enter Valid Email"}),
 
     password: z
     .string({required_error : "Enter Valid Password"})
-    .min(6,{message : "Enter valid Password 6 char"})
+    .min(6,{message : "Invalid Credintials"})
     
 });
 
-module.exports = {signupSchema,loginSchema};
+const conSchema = z.object({
+    username: z
+    .string({required_error: "Name is Required"})
+    .trim()
+    .min(3, {message:"Name must be at least 3 chars."})
+    .max(255, {message: "not more than 255 char"}),
+
+
+    email : z
+    .string({required_error: "Email is required"})
+    .trim()
+    .email({message: "must be email"})
+    .min(3, {message : "Enter Valid Email"}),
+
+    message: z
+    .string({required_error: "Name is Required"})
+    .trim()
+    .min(3, {message:"Name must be at least 3 chars."})
+    .max(5000, {message: "not more than 5000 char"}),
+
+
+})
+
+module.exports = {signupSchema,loginSchema,conSchema};
