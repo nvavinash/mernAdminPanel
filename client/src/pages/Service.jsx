@@ -3,7 +3,7 @@ import { useAuth } from "../store/auth";
 
 export const Service = () => {
   const { allServices } = useAuth();
-  const serviceArray = Object.values(allServices);
+
 
   return (
     <>
@@ -12,7 +12,7 @@ export const Service = () => {
           <h1 className="main-heading">Services</h1>
         </div>
         <div className="container grid grid-three-cols">
-          {serviceArray.map(({id,provider,price,service,description},index) => (
+          {allServices.map(({id,provider,price,service,description},index) => (
              <div className="card" key={index}>
               <div className="card-img">
                 <img src="/images/design.png" alt="our services images" width={500} />
@@ -24,7 +24,9 @@ export const Service = () => {
                 </div>
                 <h2>{service}</h2>
                 <p>{description}</p>
+          
               </div>
+               
             </div>
           ))}
         </div>

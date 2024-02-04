@@ -24,6 +24,7 @@ app.use("/api/data", serivceRoute);
 
 app.use("/api/admin", adminRoute);
 
+
 app.use(errorMiddleware);
 
 

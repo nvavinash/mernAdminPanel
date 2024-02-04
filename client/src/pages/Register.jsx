@@ -76,7 +76,7 @@ export const Register =()=>{
                             </div>
                             <div>
                                 <label htmlFor="email">Email</label>
-                                <input type="email" name="email" placeholder="enter your email" id="email" required autoComplete="off" value={user.email} onChange={handleInput}/>
+                                <input type="email" name="email" placeholder="enter your email" id="email" required autoComplete="off" value={user.email.toLowerCase()} onChange={handleInput}/>
                             </div>
                             <div>
                                 <label htmlFor="phone">Phone</label>

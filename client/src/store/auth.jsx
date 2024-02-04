@@ -8,8 +8,8 @@ export const AuthProvider = ({children}) =>{
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userN,setUser] = useState("");
-    const [allServices,setServices] = useState("");
-  
+    const [allServices,setServices] = useState([]);
+    const authorizationToken = `Bearer ${token}`;
 
     const storeTokenInLs =(serverToken )=>{
         setToken(serverToken);
@@ -29,7 +29,7 @@ export const AuthProvider = ({children}) =>{
             const response = await fetch("http://localhost:8080/api/auth/user",{
                 method: "GET",
                 headers:{
-                    Authorization: `Bearer ${token}`,
+                    Authorization: authorizationToken,
                 },
                 
             });
@@ -55,7 +55,13 @@ export const AuthProvider = ({children}) =>{
             });
             if(response.ok){
                 const data = await response.json();
-            setServices(data.msg);
+                     // Ensure that data is an array before setting it in the state
+            if (Array.isArray(data.msg)) {
+                setServices(data.msg);
+            } else {
+                console.error("Received non-array data for services:", data.msg);
+            }
+          
             }
 
         }catch(error){
@@ -69,7 +75,7 @@ export const AuthProvider = ({children}) =>{
     },[]);
 
 return(
-    <AuthContext.Provider value ={{isLoggedIn,storeTokenInLs,LogoutUser,userN,allServices}}>
+    <AuthContext.Provider value ={{isLoggedIn,storeTokenInLs,LogoutUser,userN,allServices,authorizationToken}}>
         {children}
     </AuthContext.Provider>
 );
