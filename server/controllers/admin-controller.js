@@ -52,4 +52,18 @@ const getAllcontacts = async(req,res)=>{
     }
 };
 
-module.exports = {getAllusers,getAllcontacts,deleteUserById,getUserById}
+//===========updateUserById--------------
+const usersUpdateById = async(req,res)=>{
+    try{
+        const id = req.params.id;
+        const updatedUserData = await req.body;
+        const updateData = await User.updateOne({_id : id}, {
+            $set: updatedUserData,
+        });
+        return res.status(200).json(updateData)
+    }catch(error){
+        console.error(error);
+    }
+}
+
+module.exports = {getAllusers,getAllcontacts,deleteUserById,getUserById,usersUpdateById}
